@@ -68,9 +68,9 @@ function App() {
 
       <div className='h-full max-h-[78vh] overflow-y-scroll scrollable flex flex-col'>
   {CureentQuery.map((query, index) => (
-    <div key={index} className='min-w-1/2 '>
+    <div key={index} className='min-w-1/2 mt-10 '>
       {/* Query aligned left */}
-      <div className='text-right flex-col'>
+      <div className='text-right text-black flex-col'>
             {index == CureentQuery.length - 1 ? (
               <>
                 <Result ans={query} />
@@ -83,7 +83,7 @@ function App() {
 
       {/* Results aligned right */}
       {results && results[index] && (
-        <div className='flex flex-col mt-10 '>
+        <div className='flex flex-col mt-5 '>
           {results[index].map((el, i) => (
             <div key={`${index}-${i}`} className='min-w-1/2 text-left'>
               <Result ans={el} />
