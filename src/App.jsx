@@ -57,7 +57,7 @@ function App() {
     {/* side bar */}
     <div className={` ${isOpen? "max-sm:col-span-5 col-span-1" : "hidden"}  bg-[#44403b]  transition-all duration-300 `}  >
       <h1 className='mt-20 text-left pl-2'>Search History</h1>
-      <div className='flex flex-col gap-2 overflow-y-scroll overflow-hidden h-screen text-left pl-2 mt-2   '>{pastQuery.map((el)=>(<div>{el}</div>))}</div>
+      <div className='flex flex-col gap-2 overflow-y-scroll scrollable overflow-hidden h-screen text-left pl-2 mt-2   '>{pastQuery.map((el)=>(<div>{el}</div>))}</div>
     </div>
 
     {/* main section */}
