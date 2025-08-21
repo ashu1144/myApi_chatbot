@@ -19,6 +19,7 @@ function App() {
 
 
 
+
   function setQueryLocally() {
   let oldQueries = JSON.parse(localStorage.getItem("pastQuery")) || [];
   let newQueries = [...oldQueries, query];
@@ -27,6 +28,12 @@ function App() {
   setcurrentQuery(CureentQueryVar)
   setPastQuery(newQueries);
 }
+
+
+  const handelClear=()=>{
+    localStorage.clear()
+    window.location.reload()
+  }
 
 
 
@@ -55,7 +62,10 @@ function App() {
    
     {/* side bar */}
     <div className={` ${isOpen? "max-sm:col-span-5 col-span-1" : "hidden"} overflow-hidden  bg-[#44403b]  transition-all duration-300 `}  >
-      <h1 className='mt-20 text-left pl-2'>Search History</h1>
+      <div className='mt-20 flex justify-between px-5' >
+        <h1 className=''>Search History</h1>
+        <button className='border-green-50 border px-2 rounded-2xl hover:scale-103' onClick={handelClear} > clear history </button>
+      </div>
       <div className='flex flex-col gap-2 overflow-y-scroll scrollable overflow-hidden h-screen text-left pl-2 mt-2   '>{pastQuery.map((el)=>(<div>{el}</div>))}</div>
     </div>
 
@@ -65,34 +75,33 @@ function App() {
           {/* header */}
           <div className=''><h1 className='text-3xl p-5 capitalize font-medium text-transparent bg-clip-text bg-gradient-to-tr from-pink-800 via-blue-200 to-purple-800 tracking-tight '>hii how can i help you</h1></div>
           {/* result section */}
-          <div className=' max-sm:max-h-[70vh] md:min-h-[75vh] overflow-y-scroll scrollable flex flex-col  '>
-
-          {CureentQuery.map((query, index) => (
-        <div key={index} className='min-w-1/2 mt-10 '>
-          {/* Query aligned left */}
-          <div className='text-right text-black flex-col'>
-                {index == CureentQuery.length - 1 ? (
-                  <>
+          <div className=' max-sm:max-h-[70vh] md:min-h-[75vh] md:max-h-[75vh] overflow-y-scroll scrollable flex flex-col md:px-2  '>
+            {CureentQuery.map((query, index) => (
+          <div key={index} className='min-w-1/2 mt-10 '>
+            {/* Query aligned left */}
+            <div className='text-right text-black flex-col'>
+                  {index == CureentQuery.length - 1 ? (
+                    <>
+                      <Result ans={query} />
+                      {Loading && <p>Loading..</p>}
+                    </>
+                  ) : (
                     <Result ans={query} />
-                    {Loading && <p>Loading..</p>}
-                  </>
-                ) : (
-                  <Result ans={query} />
-                )}
-          </div>
-
-          {/* Results aligned right */}
-          {results && results[index] && (
-            <div className='flex flex-col mt-5 '>
-              {results[index].map((el, i) => (
-                <div key={`${index}-${i}`} className='min-w-1/2 text-left'>
-                  <Result ans={el} />
-                </div>
-              ))}
+                  )}
             </div>
-          )}
-        </div>
-            ))}
+
+            {/* Results aligned right */}
+            {results && results[index] && (
+              <div className='flex flex-col mt-5 '>
+                {results[index].map((el, i) => (
+                  <div key={`${index}-${i}`} className='min-w-1/2 text-left'>
+                    <Result ans={el} />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+              ))}
           </div>
           {/* button */}
             <div className={`w-full ${onFocus ? "max-w-xl border-blue-500" : "max-w-md"} hover:max-w-xl m-auto p-4 rounded-full bg-zinc-700 border-gray-300/80 border-2 flex transition-all duration-300`}>
